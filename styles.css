@@ -1,19 +1,31 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50e3c2;
+    --background-light: #f5f7fa;
+    --text-light: #333;
+    --background-dark: #2c3e50;
+    --text-dark: #ecf0f1;
+    --accent-color: #e74c3c;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s, color 0.3s;
+    background-color: var(--background-light);
+    color: var(--text-light);
 }
 
 body.dark-mode {
-    background-color: #1e1e1e;
-    color: #ffffff;
+    background-color: var(--background-dark);
+    color: var(--text-dark);
 }
 
 #editor-wrapper {
@@ -24,54 +36,91 @@ body.dark-mode {
     box-sizing: border-box;
 }
 
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
 #editor-container {
     display: flex;
     flex-grow: 1;
     gap: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #editor, #preview {
     width: 50%;
     height: 100%;
-    padding: 10px;
+    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
 }
 
 #editor {
     resize: none;
-    border: 1px solid #ccc;
-    background-color: inherit;
-    color: inherit;
+    border: none;
+    background-color: white;
+    color: var(--text-light);
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 #preview {
-    border: 1px solid #ccc;
+    background-color: var(--background-light);
+    border-left: 2px solid var(--primary-color);
+}
+
+.dark-mode #editor {
+    background-color: #34495e;
+    color: var(--text-dark);
 }
 
 .dark-mode #preview {
-    background-color: #2d2d2d;
-    color: #ffffff;
+    background-color: var(--background-dark);
+    border-left-color: var(--secondary-color);
 }
 
 #toolbar {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 10px;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #toolbar button {
-    padding: 5px 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    padding: 8px 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#toolbar button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.dark-mode #toolbar {
+    background-color: #34495e;
 }
 
 .dark-mode #toolbar button {
-    background-color: #3a3a3a;
-    color: #ffffff;
-    border-color: #555;
+    background-color: var(--secondary-color);
+    color: var(--background-dark);
+}
+
+.dark-mode #toolbar button:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .full-screen #editor-wrapper {
@@ -92,15 +141,74 @@ body.dark-mode {
         width: 100%;
         height: 50%;
     }
+    #preview {
+        border-left: none;
+        border-top: 2px solid var(--primary-color);
+    }
 }
 
 /* Syntax highlighting styles */
 .hljs {
     background: #f0f0f0;
     color: #444;
+    padding: 0.5em;
+    border-radius: 4px;
 }
 
 .dark-mode .hljs {
     background: #2d2d2d;
     color: #e0e0e0;
+}
+
+/* Additional styles for Markdown content */
+#preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6 {
+    color: var(--primary-color);
+}
+
+#preview a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+#preview a:hover {
+    text-decoration: underline;
+}
+
+#preview blockquote {
+    border-left: 4px solid var(--secondary-color);
+    margin: 0;
+    padding-left: 20px;
+    font-style: italic;
+}
+
+#preview code {
+    background-color: rgba(74, 144, 226, 0.1);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+#preview pre code {
+    display: block;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+#preview table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#preview th, #preview td {
+    border: 1px solid var(--primary-color);
+    padding: 8px;
+}
+
+#preview th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.dark-mode #preview th {
+    background-color: var(--secondary-color);
+    color: var(--background-dark);
 }
