@@ -53,9 +53,10 @@ function exportHtml() {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Exported Markdown</title>
             <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
-                pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+                body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }
+                pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
                 code { font-family: Consolas, Monaco, 'Andale Mono', monospace; }
+                img { max-width: 100%; height: auto; }
             </style>
         </head>
         <body>
@@ -74,7 +75,41 @@ function exportHtml() {
 }
 
 function exportPdf() {
-    alert("PDF export functionality would typically require a server-side component or a third-party library. This is a placeholder for that feature.");
+    // Create a clone of the preview element
+    const clonedPreview = preview.cloneNode(true);
+    
+    // Create a temporary container with a white background
+    const tempContainer = document.createElement('div');
+    tempContainer.style.position = 'absolute';
+    tempContainer.style.left = '-9999px';
+    tempContainer.style.background = 'white';
+    tempContainer.style.width = '800px';  // Set a fixed width for better PDF formatting
+    tempContainer.style.padding = '20px';
+    tempContainer.appendChild(clonedPreview);
+    document.body.appendChild(tempContainer);
+
+    html2canvas(tempContainer).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jspdf.jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+        });
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+        const imgX = (pdfWidth - imgWidth * ratio) / 2;
+        const imgY = 30;
+
+        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+        pdf.save('exported_markdown.pdf');
+
+        // Remove the temporary container
+        document.body.removeChild(tempContainer);
+    });
 }
 
 editor.addEventListener('input', updatePreview);
