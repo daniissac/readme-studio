@@ -4,6 +4,8 @@ const darkModeToggle = document.getElementById('dark-mode-toggle');
 const exportHtmlBtn = document.getElementById('export-html');
 const exportPdfBtn = document.getElementById('export-pdf');
 const toolbar = document.getElementById('toolbar');
+const downloadMdBtn = document.getElementById('download-md');
+
 
 // Configure marked to use highlight.js for code syntax highlighting
 marked.setOptions({
@@ -38,79 +40,39 @@ function toggleDarkMode() {
     localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
 }
 
-function exportHtml() {
-    const htmlContent = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Exported Markdown</title>
-            <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }
-                pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
-                code { font-family: Consolas, Monaco, 'Andale Mono', monospace; }
-                img { max-width: 100%; height: auto; }
-            </style>
-        </head>
-        <body>
-            ${preview.innerHTML}
-        </body>
-        </html>
-    `;
-    
-    const blob = new Blob([htmlContent], { type: 'text/html' });
+function downloadMd() {
+    const content = editor.value;
+    const blob = new Blob([content], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'exported_markdown.html';
+    a.download = 'document.md';
     a.click();
     URL.revokeObjectURL(url);
 }
 
 function exportPdf() {
-    // Create a clone of the preview element
-    const clonedPreview = preview.cloneNode(true);
-    
-    // Create a temporary container with a white background
-    const tempContainer = document.createElement('div');
-    tempContainer.style.position = 'absolute';
-    tempContainer.style.left = '-9999px';
-    tempContainer.style.background = 'white';
-    tempContainer.style.width = '800px';  // Set a fixed width for better PDF formatting
-    tempContainer.style.padding = '20px';
-    tempContainer.appendChild(clonedPreview);
-    document.body.appendChild(tempContainer);
+    const content = preview.innerHTML;
+    const pdf = new jspdf.jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+    });
 
-    html2canvas(tempContainer).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jspdf.jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: 'a4'
-        });
-
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = pdf.internal.pageSize.getHeight();
-        const imgWidth = canvas.width;
-        const imgHeight = canvas.height;
-        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-        const imgX = (pdfWidth - imgWidth * ratio) / 2;
-        const imgY = 30;
-
-        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-        pdf.save('exported_markdown.pdf');
-
-        // Remove the temporary container
-        document.body.removeChild(tempContainer);
+    pdf.html(content, {
+        callback: function (pdf) {
+            pdf.save('export.pdf');
+        },
+        x: 10,
+        y: 10,
+        width: 190, // A4 width is 210mm, leaving 10mm margins on each side
+        windowWidth: 800 // Adjust this value to change the scale of the content
     });
 }
-
 editor.addEventListener('input', updatePreview);
 darkModeToggle.addEventListener('click', toggleDarkMode);
-exportHtmlBtn.addEventListener('click', exportHtml);
 exportPdfBtn.addEventListener('click', exportPdf);
-
+downloadMdBtn.addEventListener('click', downloadMd);
 toolbar.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
         const action = e.target.getAttribute('data-action');
