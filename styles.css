@@ -3,9 +3,9 @@
     --secondary-color: #50e3c2;
     --background-light: #f5f7fa;
     --text-light: #333;
-    --background-dark: #2c3e50;
-    --text-dark: #ecf0f1;
-    --accent-color: #e74c3c;
+    --background-dark: #000000; /* Changed to pure black for AMOLED */
+    --text-dark: #ffffff; /* Changed to white for better contrast */
+    --accent-color: #000000; /* Changed to black */
 }
 
 body, html {
@@ -74,53 +74,26 @@ h1 {
 }
 
 .dark-mode #editor {
-    background-color: #34495e;
+    background-color: #000000; /* Pure black for AMOLED */
     color: var(--text-dark);
 }
 
 .dark-mode #preview {
-    background-color: var(--background-dark);
-    border-left-color: var(--secondary-color);
-}
-
-#toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#toolbar button {
-    padding: 8px 12px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-}
-
-#toolbar button:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
+    background-color: #000000; /* Pure black for AMOLED */
+    border-left-color: var(--accent-color);
 }
 
 .dark-mode #toolbar {
-    background-color: #34495e;
+    background-color: #000000; /* Pure black for AMOLED */
 }
 
 .dark-mode #toolbar button {
-    background-color: var(--secondary-color);
-    color: var(--background-dark);
+    background-color: var(--accent-color);
+    color: var(--text-dark);
 }
 
 .dark-mode #toolbar button:hover {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: #333333; /* Slightly lighter black for hover effect */
 }
 
 @media (max-width: 768px) {
@@ -146,29 +119,21 @@ h1 {
 }
 
 .dark-mode .hljs {
-    background: #2d2d2d;
+    background: #111111; /* Very dark gray for code blocks */
     color: #e0e0e0;
 }
 
 /* Additional styles for Markdown content */
 #preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6 {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 #preview a {
-    color: var(--secondary-color);
-    text-decoration: none;
-}
-
-#preview a:hover {
-    text-decoration: underline;
+    color: var(--accent-color);
 }
 
 #preview blockquote {
-    border-left: 4px solid var(--secondary-color);
-    margin: 0;
-    padding-left: 20px;
-    font-style: italic;
+    border-left: 4px solid var(--accent-color);
 }
 
 #preview code {
@@ -268,7 +233,6 @@ input:checked + .slider:before {
     display: none;
 }
 
-
 #expand-toggle {
     background: none;
     border: none;
@@ -280,4 +244,3 @@ input:checked + .slider:before {
 #expand-toggle:hover {
     color: var(--secondary-color);
 }
-
