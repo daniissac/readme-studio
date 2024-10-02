@@ -8,9 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <!-- Add jsPDF library and its dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js"></script>
 </head>
 <body>
     <div id="editor-wrapper">
@@ -25,7 +25,12 @@
             <button data-action="code">Code Block</button>
             <button id="download-md">Download</button>
             <button id="export-pdf">Export PDF</button>
-            <button id="dark-mode-toggle">Toggle Dark Mode</button>
+                    <div class="dark-mode-container">
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
         </div>
         <div id="editor-container">
             <textarea id="editor" placeholder="Write your Markdown here..."></textarea>

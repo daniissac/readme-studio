@@ -1,7 +1,6 @@
 const editor = document.getElementById('editor');
 const preview = document.getElementById('preview');
 const darkModeToggle = document.getElementById('dark-mode-toggle');
-const exportHtmlBtn = document.getElementById('export-html');
 const exportPdfBtn = document.getElementById('export-pdf');
 const toolbar = document.getElementById('toolbar');
 const downloadMdBtn = document.getElementById('download-md');
@@ -35,10 +34,12 @@ function insertMarkdown(prefix, suffix = '') {
     updatePreview();
 }
 
+
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
 }
+
 
 function downloadMd() {
     const content = editor.value;
@@ -102,7 +103,6 @@ toolbar.addEventListener('click', (e) => {
     }
 });
 
-// Load saved content and dark mode preference
 window.addEventListener('load', () => {
     const savedContent = localStorage.getItem('markdownContent');
     if (savedContent) {
@@ -113,6 +113,7 @@ window.addEventListener('load', () => {
     const darkModePreference = localStorage.getItem('darkMode');
     if (darkModePreference === 'true') {
         document.body.classList.add('dark-mode');
+        darkModeToggle.checked = true;
     }
 });
 
