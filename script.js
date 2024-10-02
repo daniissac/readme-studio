@@ -4,9 +4,9 @@ const darkModeToggle = document.getElementById('dark-mode-toggle');
 const exportPdfBtn = document.getElementById('export-pdf');
 const toolbar = document.getElementById('toolbar');
 const downloadMdBtn = document.getElementById('download-md');
+const expandToggle = document.getElementById('expand-toggle');
 
 
-// Configure marked to use highlight.js for code syntax highlighting
 marked.setOptions({
     highlight: function(code, lang) {
         const language = hljs.getLanguage(lang) ? lang : 'plaintext';
@@ -70,6 +70,15 @@ function exportPdf() {
         windowWidth: 800 // Adjust this value to change the scale of the content
     });
 }
+
+
+function toggleExpand() {
+    const editorContainer = document.getElementById('editor-container');
+    editorContainer.classList.toggle('expanded');
+    expandToggle.textContent = editorContainer.classList.contains('expanded') ? 'Reduce Editor' : 'Expand Editor';
+}
+
+expandToggle.addEventListener('click', toggleExpand);
 editor.addEventListener('input', updatePreview);
 darkModeToggle.addEventListener('click', toggleDarkMode);
 exportPdfBtn.addEventListener('click', exportPdf);
@@ -116,6 +125,8 @@ window.addEventListener('load', () => {
         darkModeToggle.checked = true;
     }
 });
+
+
 
 // Initial preview
 updatePreview();

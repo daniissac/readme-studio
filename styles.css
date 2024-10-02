@@ -259,3 +259,25 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.expanded #editor {
+    width: 100%;
+}
+
+.expanded #preview {
+    display: none;
+}
+
+
+#expand-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: var(--primary-color);
+}
+
+#expand-toggle:hover {
+    color: var(--secondary-color);
+}
+
