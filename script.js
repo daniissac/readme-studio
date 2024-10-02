@@ -74,9 +74,17 @@ function exportPdf() {
 
 function toggleExpand() {
     const editorContainer = document.getElementById('editor-container');
+    const icon = expandToggle.querySelector('i');
     editorContainer.classList.toggle('expanded');
-    expandToggle.textContent = editorContainer.classList.contains('expanded') ? 'Reduce Editor' : 'Expand Editor';
+    if (editorContainer.classList.contains('expanded')) {
+        icon.classList.replace('fa-expand-arrows-alt', 'fa-compress-arrows-alt');
+        expandToggle.setAttribute('aria-label', 'Reduce Editor');
+    } else {
+        icon.classList.replace('fa-compress-arrows-alt', 'fa-expand-arrows-alt');
+        expandToggle.setAttribute('aria-label', 'Expand Editor');
+    }
 }
+
 
 expandToggle.addEventListener('click', toggleExpand);
 editor.addEventListener('input', updatePreview);
