@@ -123,16 +123,6 @@ h1 {
     color: white;
 }
 
-.full-screen #editor-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9999;
-    background-color: inherit;
-}
-
 @media (max-width: 768px) {
     #editor-container {
         flex-direction: column;

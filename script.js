@@ -1,7 +1,6 @@
 const editor = document.getElementById('editor');
 const preview = document.getElementById('preview');
 const darkModeToggle = document.getElementById('dark-mode-toggle');
-const fullScreenToggle = document.getElementById('full-screen-toggle');
 const exportHtmlBtn = document.getElementById('export-html');
 const exportPdfBtn = document.getElementById('export-pdf');
 const toolbar = document.getElementById('toolbar');
@@ -37,11 +36,6 @@ function insertMarkdown(prefix, suffix = '') {
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-}
-
-function toggleFullScreen() {
-    document.body.classList.toggle('full-screen');
-    fullScreenToggle.textContent = document.body.classList.contains('full-screen') ? 'Exit Full Screen' : 'Full Screen';
 }
 
 function exportHtml() {
@@ -114,7 +108,6 @@ function exportPdf() {
 
 editor.addEventListener('input', updatePreview);
 darkModeToggle.addEventListener('click', toggleDarkMode);
-fullScreenToggle.addEventListener('click', toggleFullScreen);
 exportHtmlBtn.addEventListener('click', exportHtml);
 exportPdfBtn.addEventListener('click', exportPdf);
 
