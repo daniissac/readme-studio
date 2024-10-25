@@ -155,7 +155,6 @@ button:hover {
 .dark-mode #preview code {
     background: rgba(255,255,255,0.1);
 }
-
 .tooltip-menu {
     display: none;
     position: fixed;
@@ -163,15 +162,26 @@ button:hover {
     border-radius: 4px;
     box-shadow: var(--shadow);
     z-index: 1000;
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
 .tooltip-item {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tooltip-item:hover {
     background: var(--bg-light);
+}
+
+.tooltip-item svg {
+    fill: currentColor;
 }
 
 .dark-mode .tooltip-menu {
@@ -181,7 +191,6 @@ button:hover {
 .dark-mode .tooltip-item:hover {
     background: #3d3d3d;
 }
-
 .switch {
     width: 60px;
     height: 34px;

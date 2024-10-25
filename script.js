@@ -59,17 +59,41 @@ function createTooltipMenu() {
     const menu = document.createElement('div');
     menu.className = 'tooltip-menu';
     menu.innerHTML = `
-        <div class="tooltip-item" data-format="bold">Bold</div>
-        <div class="tooltip-item" data-format="italic">Italic</div>
-        <div class="tooltip-item" data-format="heading">Heading</div>
-        <div class="tooltip-item" data-format="quote">Quote</div>
-        <div class="tooltip-item" data-format="code">Code Block</div>
-        <div class="tooltip-item" data-format="link">Link</div>
+        <div class="tooltip-item" data-format="bold">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path d="M4 2h4.5a3.5 3.5 0 0 1 0 7H4V2zm0 7h5.5a3.5 3.5 0 0 1 0 7H4V9z"/>
+            </svg>
+        </div>
+        <div class="tooltip-item" data-format="italic">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path d="M6 2l4 12H8l-4-12h2z"/>
+            </svg>
+        </div>
+        <div class="tooltip-item" data-format="heading">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path d="M2 3h2v10H2V3zm10 0h2v10h-2V3zM6 3h4v2H6V3zm0 4h4v2H6V7zm0 4h4v2H6v-2z"/>
+            </svg>
+        </div>
+        <div class="tooltip-item" data-format="quote">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path d="M3 6.5a2.5 2.5 0 1 1 5 0v1a6 6 0 0 1-5 5.94V11.5a4 4 0 0 0 3-3.87v-.13H3V6.5zm8 0a2.5 2.5 0 1 1 5 0v1a6 6 0 0 1-5 5.94V11.5a4 4 0 0 0 3-3.87v-.13h-3V6.5z"/>
+            </svg>
+        </div>
+        <div class="tooltip-item" data-format="code">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+            </svg>
+        </div>
+        <div class="tooltip-item" data-format="link">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+            </svg>
+        </div>
     `;
     document.body.appendChild(menu);
     return menu;
 }
-
 function handleContextMenu(e) {
     e.preventDefault();
     tooltipMenu.style.display = 'block';
