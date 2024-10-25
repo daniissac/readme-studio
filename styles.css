@@ -63,11 +63,48 @@ h1 {
     border: none;
     border-radius: 8px;
     outline: none;
-    resize: none;
     background: transparent;
     color: inherit;
     white-space: pre-wrap;
     word-wrap: break-word;
+    overflow-y: auto;
+}
+
+#editor strong {
+    font-weight: bold;
+}
+
+#editor em {
+    font-style: italic;
+}
+
+#editor h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+#editor h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+}
+
+#editor blockquote {
+    border-left: 3px solid var(--primary);
+    margin: 1em 0;
+    padding-left: 1em;
+    color: var(--secondary);
+}
+
+#editor code {
+    background: rgba(0,0,0,0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Monaco', monospace;
+}
+
+#editor a {
+    color: var(--primary);
+    text-decoration: underline;
 }
 
 #editor[placeholder]:empty:before {
@@ -99,6 +136,10 @@ button:hover {
 .dark-mode {
     background-color: var(--bg-dark);
     color: var(--text-dark);
+}
+
+.dark-mode #editor code {
+    background: rgba(255,255,255,0.1);
 }
 
 .tooltip-menu {
