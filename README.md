@@ -1,46 +1,60 @@
 # MarkdownMe
-A web-based Markdown editor with live preview, syntax highlighting, and additional features for a better writing experience.
+A modern, Medium-style Markdown editor with live preview and enhanced writing features.
 
 ## Features
 
-- Live Markdown preview
+### Core Functionality
+- Integrated live preview directly in the editor
+- Medium-style Markdown formatting
+- Smart typography with proper quotes and dashes
 - Syntax highlighting for code blocks
-- Dark mode toggle switch
-- Responsive design for both desktop and mobile devices
-- Toolbar for common Markdown formatting options
-- Local storage to save your work automatically
-- Export functionality (PDF and Markdown)
+- Dark mode with AMOLED support
 
-## Demo
+### Enhanced Writing Experience
+- Keyboard shortcuts for common actions
+- Right-click formatting menu
+- Word count tracking
+- Autosave with status indicators
+- Fullscreen mode
 
-You can try out the live demo [here](https://daniissac.com/markdown)
+### Formatting Options
+- Bold (Ctrl+B)
+- Italic (Ctrl+I)
+- Headings
+- Blockquotes
+- Code blocks
+- Links
+
+### Export Options
+- Download as Markdown (Ctrl+S)
+- Export to PDF (Ctrl+P)
+
+### Technical Features
+- Local storage backup
+- Custom scrollbar styling
+- Responsive design
+- SEO optimized
+- Social sharing metadata
+
+## Keyboard Shortcuts
+- `Ctrl+B` - Bold text
+- `Ctrl+I` - Italic text
+- `Ctrl+S` - Download Markdown
+- `Ctrl+P` - Export PDF
+- `F11` - Toggle fullscreen
 
 ## Usage
+1. Start typing in the editor
+2. Use keyboard shortcuts or right-click menu for formatting
+3. See your formatted text instantly
+4. Export your work when ready
 
-1. Write or paste your Markdown content in the left pane.
-2. See the formatted preview in real-time on the right pane.
-3. Use the toolbar buttons to quickly add Markdown formatting.
-4. Toggle dark mode using the switch in the top right corner for comfortable writing in low-light environments.
-5. Your content is automatically saved in the browser's local storage.
-6. Export your work as PDF or download as Markdown using the respective buttons.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Browser Support
+Works in all modern browsers:
+- Chrome
+- Firefox
+- Safari
+- Edge
 
 ## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Credits
-
-This project uses the following open-source libraries:
-- [Marked.js](https://marked.js.org/) for Markdown parsing
-- [Highlight.js](https://highlightjs.org/) for syntax highlighting
-- [jsPDF](https://github.com/MrRio/jsPDF) for PDF generation
-- [html2canvas](https://html2canvas.hertzen.com/) for HTML to canvas conversion
-- [DOMPurify](https://github.com/cure53/DOMPurify) for HTML sanitization
-
-## Contact
-
-If you have any questions, feel free to reach out to me or open an issue in this repository.
+This project is licensed under the [MIT License](LICENSE).

@@ -1,206 +1,149 @@
 :root {
-    --primary-color: #4a90e2;
-    --secondary-color: #50e3c2;
-    --background-light: #f5f7fa;
+    --primary: #4a90e2;
+    --secondary: #50e3c2;
+    --bg-light: #f5f7fa;
+    --bg-dark: #000000;
     --text-light: #333;
-    --background-dark: #000000; /* Changed to pure black for AMOLED */
-    --text-dark: #ffffff; /* Changed to white for better contrast */
-    --accent-color: #000000; /* Changed to black */
+    --text-dark: #ffffff;
+    --accent: #000000;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
-body, html {
+/* Base Styles */
+* {
     margin: 0;
     padding: 0;
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s, color 0.3s;
-    background-color: var(--background-light);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-light);
     color: var(--text-light);
+    transition: var(--transition);
+    min-height: 100vh;
 }
 
-body.dark-mode {
-    background-color: var(--background-dark);
-    color: var(--text-dark);
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-#editor-wrapper {
+/* Header */
+.header {
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
 h1 {
-    text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 20px;
+    color: var(--primary);
+    font-size: 2rem;
 }
 
-#editor-container {
-    display: flex;
-    flex-grow: 1;
-    gap: 20px;
+/* Editor */
+.editor-container {
+    position: relative;
+    height: calc(100vh - 200px);
+    box-shadow: var(--shadow);
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#editor, #preview {
-    width: 50%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto;
 }
 
 #editor {
-    resize: none;
-    border: none;
-    background-color: white;
-    color: var(--text-light);
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    font-family: 'Monaco', monospace;
     font-size: 16px;
     line-height: 1.6;
+    border: none;
+    border-radius: 8px;
+    resize: none;
+    background: transparent;
+    color: inherit;
 }
 
-#preview {
-    background-color: var(--background-light);
-    border-left: 2px solid var(--primary-color);
+.preview-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 1.5rem;
+    pointer-events: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
-.dark-mode #editor {
-    background-color: #000000; /* Pure black for AMOLED */
-    color: var(--text-dark);
+/* Actions */
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
-.dark-mode #preview {
-    background-color: #000000; /* Pure black for AMOLED */
-    border-left-color: var(--accent-color);
-}
-
-#toolbar button {
-    padding: 8px 12px;
-    background-color: var(--primary-color);
+button {
+    padding: 0.5rem 1rem;
+    background: var(--primary);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
 }
 
-#toolbar button:hover {
+button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow);
 }
 
-#toolbar button:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+/* Dark Mode */
+.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
 }
 
-.dark-mode #toolbar button {
-    background-color: var(--secondary-color);
-    color: var(--background-dark);
+.dark-mode button {
+    background: var(--secondary);
+    color: var(--bg-dark);
 }
 
-.dark-mode #toolbar button:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-
-@media (max-width: 768px) {
-    #editor-container {
-        flex-direction: column;
-    }
-    #editor, #preview {
-        width: 100%;
-        height: 50%;
-    }
-    #preview {
-        border-left: none;
-        border-top: 2px solid var(--primary-color);
-    }
-}
-
-/* Syntax highlighting styles */
-.hljs {
-    background: #f0f0f0;
-    color: #444;
-    padding: 0.5em;
+/* Tooltip Menu */
+.tooltip-menu {
+    position: fixed;
+    background: white;
     border-radius: 4px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
 }
 
-.dark-mode .hljs {
-    background: #111111; /* Very dark gray for code blocks */
-    color: #e0e0e0;
+.tooltip-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
 }
 
-/* Additional styles for Markdown content */
-#preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6 {
-    color: var(--accent-color);
+.tooltip-item:hover {
+    background: var(--bg-light);
 }
 
-#preview a {
-    color: var(--accent-color);
+.dark-mode .tooltip-menu {
+    background: #2d2d2d;
 }
 
-#preview blockquote {
-    border-left: 4px solid var(--accent-color);
+.dark-mode .tooltip-item:hover {
+    background: #3d3d3d;
 }
 
-#preview code {
-    background-color: rgba(74, 144, 226, 0.1);
-    padding: 2px 4px;
-    border-radius: 4px;
-}
-
-#preview pre code {
-    display: block;
-    padding: 10px;
-    overflow-x: auto;
-}
-
-#preview table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#preview th, #preview td {
-    border: 1px solid var(--primary-color);
-    padding: 8px;
-}
-
-#preview th {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.dark-mode #preview th {
-    background-color: var(--secondary-color);
-    color: var(--background-dark);
-}
-
-.dark-mode-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
+/* Dark Mode Toggle */
 .switch {
-    position: relative;
-    display: inline-block;
     width: 60px;
     height: 34px;
+    position: relative;
+    display: inline-block;
 }
 
 .switch input {
@@ -211,58 +154,103 @@ h1 {
 
 .slider {
     position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: #ccc;
-    transition: .4s;
+    transition: var(--transition);
+    border-radius: 34px;
 }
 
 .slider:before {
-    position: absolute;
     content: "";
+    position: absolute;
     height: 26px;
     width: 26px;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    transition: .4s;
+    transition: var(--transition);
+    border-radius: 50%;
 }
 
 input:checked + .slider {
-    background-color: var(--primary-color);
+    background-color: var(--primary);
 }
 
 input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-.slider.round {
-    border-radius: 34px;
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .editor-container {
+        height: calc(100vh - 150px);
+    }
 }
 
-.slider.round:before {
-    border-radius: 50%;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-.expanded #editor {
-    width: 100%;
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
 }
 
-.expanded #preview {
-    display: none;
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
 }
 
-#expand-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2em;
-    color: var(--primary-color);
+.dark-mode ::-webkit-scrollbar-track {
+    background: var(--bg-dark);
 }
 
-#expand-toggle:hover {
-    color: var(--secondary-color);
+/* Focus States */
+#editor:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Code Block Styling */
+.preview-overlay pre code {
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 0.9em;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.dark-mode .preview-overlay pre code {
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Status Bar */
+.status-bar {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.dark-mode .status-bar {
+    color: var(--text-dark);
+}
+
+#save-status {
+    animation: fadeOut 2s ease-in-out;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
