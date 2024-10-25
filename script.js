@@ -13,11 +13,7 @@ marked.setOptions({
     headerIds: false,
     gfm: true,
     breaks: true,
-    highlight: (code, lang) => {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        return hljs.highlight(code, { language }).value;
-    },
-    langPrefix: 'hljs language-',
+    pedantic: false,
     smartLists: true,
     smartypants: true
 });

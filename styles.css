@@ -73,8 +73,22 @@ h1 {
 #preview {
     overflow-y: auto;
     background: var(--bg-light);
+    line-height: 1.6;
 }
 
+#preview p {
+    margin: 1em 0;
+}
+
+#preview p + p {
+    margin-top: 1.5em;
+}
+
+#preview br {
+    display: block;
+    content: "";
+    margin-top: 1em;
+}
 #preview h1 { font-size: 2em; margin: 0.67em 0; }
 #preview h2 { font-size: 1.5em; margin: 0.83em 0; }
 #preview h3 { font-size: 1.17em; margin: 1em 0; }
