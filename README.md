@@ -1,11 +1,11 @@
 # MarkdownMe
-A modern, Medium-style Markdown editor with live preview and enhanced writing features.
+A modern, minimalist Markdown editor with live preview and enhanced writing features.
 
 ## Features
 
 ### Core Functionality
 - Integrated live preview directly in the editor
-- Medium-style Markdown formatting
+- Clean, distraction-free writing environment
 - Smart typography with proper quotes and dashes
 - Syntax highlighting for code blocks
 - Dark mode with AMOLED support
@@ -15,7 +15,6 @@ A modern, Medium-style Markdown editor with live preview and enhanced writing fe
 - Right-click formatting menu
 - Word count tracking
 - Autosave with status indicators
-- Fullscreen mode
 
 ### Formatting Options
 - Bold (Ctrl+B)
@@ -41,7 +40,6 @@ A modern, Medium-style Markdown editor with live preview and enhanced writing fe
 - `Ctrl+I` - Italic text
 - `Ctrl+S` - Download Markdown
 - `Ctrl+P` - Export PDF
-- `F11` - Toggle fullscreen
 
 ## Usage
 1. Start typing in the editor
@@ -57,4 +55,4 @@ Works in all modern browsers:
 - Edge
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as you see fit.

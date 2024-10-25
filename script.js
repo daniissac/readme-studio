@@ -3,7 +3,6 @@ const editor = document.getElementById('editor');
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 const downloadMdBtn = document.getElementById('download-md');
 const exportPdfBtn = document.getElementById('export-pdf');
-const expandToggle = document.getElementById('expand-toggle');
 
 // Initialize tooltip menu
 const tooltipMenu = createTooltipMenu();
@@ -32,7 +31,6 @@ tooltipMenu.addEventListener('click', handleTooltipClick);
 darkModeToggle.addEventListener('click', toggleDarkMode);
 downloadMdBtn.addEventListener('click', downloadMarkdown);
 exportPdfBtn.addEventListener('click', exportToPdf);
-expandToggle.addEventListener('click', toggleExpand);
 
 // Load saved content and preferences
 loadSavedContent();
