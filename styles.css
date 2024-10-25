@@ -69,13 +69,13 @@ h1 {
     background: var(--bg-light);
     color: var(--text-light);
 }
-
 #preview {
     overflow-y: auto;
     background: var(--bg-light);
     line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
-
 #preview p {
     margin: 1em 0;
 }

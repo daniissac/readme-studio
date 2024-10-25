@@ -15,7 +15,8 @@ marked.setOptions({
     breaks: true,
     pedantic: false,
     smartLists: true,
-    smartypants: true
+    smartypants: true,
+    xhtml: true
 });
 
 // Event Listeners
