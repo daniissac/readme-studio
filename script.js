@@ -7,23 +7,6 @@ const exportPdfBtn = document.getElementById('export-pdf');
 // Initialize tooltip menu
 const tooltipMenu = createTooltipMenu();
 
-// Configure Marked options
-marked.setOptions({
-    headerIds: false,
-    gfm: true,
-    breaks: true,
-    highlight: (code, lang) => {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        return hljs.highlight(code, { language }).value;
-    },
-    langPrefix: 'hljs language-',
-    smartLists: true,
-    smartypants: true
-});
-
-// Create and setup inline preview
-setupInlinePreview();
-
 // Event Listeners
 editor.addEventListener('contextmenu', handleContextMenu);
 document.addEventListener('click', () => tooltipMenu.style.display = 'none');
@@ -35,7 +18,6 @@ exportPdfBtn.addEventListener('click', exportToPdf);
 // Load saved content and preferences
 loadSavedContent();
 
-// Core Functions
 function createTooltipMenu() {
     const menu = document.createElement('div');
     menu.className = 'tooltip-menu';
@@ -51,21 +33,95 @@ function createTooltipMenu() {
     return menu;
 }
 
-function setupInlinePreview() {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'editor-wrapper';
-    editor.parentNode.insertBefore(wrapper, editor);
-    wrapper.appendChild(editor);
+function handleContextMenu(e) {
+    e.preventDefault();
+    tooltipMenu.style.display = 'block';
+    tooltipMenu.style.left = `${e.pageX}px`;
+    tooltipMenu.style.top = `${e.pageY}px`;
+}
 
-    const overlay = document.createElement('div');
-    overlay.className = 'preview-overlay';
-    wrapper.appendChild(overlay);
+function handleTooltipClick(e) {
+    const format = e.target.dataset.format;
+    const formatActions = {
+        bold: ['**', '**'],
+        italic: ['_', '_'],
+        heading: ['# '],
+        quote: ['> '],
+        code: ['```\n', '\n```'],
+        link: ['[', '](url)']
+    };
+    
+    if (formatActions[format]) {
+        insertMarkdown(...formatActions[format]);
+    }
+}
 
-    editor.addEventListener('input', () => {
-        overlay.innerHTML = marked.parse(editor.value);
-        hljs.highlightAll();
-        localStorage.setItem('markdownContent', editor.value);
+function insertMarkdown(prefix, suffix = '') {
+    const start = editor.selectionStart;
+    const end = editor.selectionEnd;
+    const text = editor.value;
+    const selection = text.substring(start, end);
+    
+    const newText = text.substring(0, start) + 
+                   prefix + selection + suffix + 
+                   text.substring(end);
+    
+    editor.value = newText;
+    editor.selectionStart = editor.selectionEnd = start + prefix.length + selection.length + suffix.length;
+    editor.focus();
+    formatText();
+}
+
+function formatText() {
+    const text = editor.value;
+    const formattedText = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>')
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    
+    editor.innerHTML = formattedText;
+    updateWordCount();
+    autoSave();
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+
+function downloadMarkdown() {
+    const blob = new Blob([editor.value], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'document.md';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function exportToPdf() {
+    const content = editor.innerHTML;
+    const pdf = new jspdf.jsPDF();
+    pdf.html(content, {
+        callback: pdf => pdf.save('document.pdf')
     });
+}
+
+function loadSavedContent() {
+    const savedContent = localStorage.getItem('markdownContent');
+    if (savedContent) {
+        editor.value = savedContent;
+        formatText();
+    }
+    
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.checked = true;
+    }
 }
 
 // Keyboard shortcuts
@@ -111,7 +167,6 @@ function showSaveStatus(message) {
     }, 2000);
 }
 
-// Word count
 function updateWordCount() {
     const wordCount = editor.value.trim()
         ? editor.value.trim().split(/\s+/).length
@@ -119,108 +174,4 @@ function updateWordCount() {
     document.getElementById('word-count').textContent = `${wordCount} words`;
 }
 
-// Update event listeners
-editor.addEventListener('input', () => {
-    updateWordCount();
-    autoSave();
-    const overlay = document.querySelector('.preview-overlay');
-    overlay.innerHTML = marked.parse(editor.value);
-    hljs.highlightAll();
-});
-
-// Initialize word count
-updateWordCount();
-
-// Fullscreen toggle
-document.addEventListener('keydown', e => {
-    if (e.key === 'F11') {
-        e.preventDefault();
-        toggleExpand();
-    }
-});
-
-function handleContextMenu(e) {
-    e.preventDefault();
-    tooltipMenu.style.display = 'block';
-    tooltipMenu.style.left = `${e.pageX}px`;
-    tooltipMenu.style.top = `${e.pageY}px`;
-}
-
-function handleTooltipClick(e) {
-    const format = e.target.dataset.format;
-    const formatActions = {
-        bold: ['**', '**'],
-        italic: ['_', '_'],
-        heading: ['# '],
-        quote: ['> '],
-        code: ['```\n', '\n```'],
-        link: ['[', '](url)']
-    };
-    
-    if (formatActions[format]) {
-        insertMarkdown(...formatActions[format]);
-    }
-}
-
-function insertMarkdown(prefix, suffix = '') {
-    const start = editor.selectionStart;
-    const end = editor.selectionEnd;
-    const text = editor.value;
-    const selection = text.substring(start, end);
-    
-    const newText = text.substring(0, start) + 
-                   prefix + selection + suffix + 
-                   text.substring(end);
-    
-    editor.value = newText;
-    editor.selectionStart = editor.selectionEnd = start + prefix.length + selection.length + suffix.length;
-    editor.focus();
-    
-    const event = new Event('input');
-    editor.dispatchEvent(event);
-}
-
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-}
-
-function downloadMarkdown() {
-    const blob = new Blob([editor.value], { type: 'text/markdown' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'document.md';
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
-function exportToPdf() {
-    const content = document.querySelector('.preview-overlay').innerHTML;
-    const pdf = new jspdf.jsPDF();
-    pdf.html(content, {
-        callback: pdf => pdf.save('document.pdf')
-    });
-}
-
-function toggleExpand() {
-    const editorContainer = editor.parentElement.parentElement;
-    const icon = expandToggle.querySelector('i');
-    editorContainer.classList.toggle('expanded');
-    icon.classList.toggle('fa-expand-arrows-alt');
-    icon.classList.toggle('fa-compress-arrows-alt');
-}
-
-function loadSavedContent() {
-    const savedContent = localStorage.getItem('markdownContent');
-    if (savedContent) {
-        editor.value = savedContent;
-        const event = new Event('input');
-        editor.dispatchEvent(event);
-    }
-    
-    if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-mode');
-        darkModeToggle.checked = true;
-    }
-}
+editor.addEventListener('input', formatText);

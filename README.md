@@ -1,13 +1,13 @@
 # MarkdownMe
-A modern, minimalist Markdown editor with live preview and enhanced writing features.
+A modern, minimalist Markdown editor with instant formatting and a clean writing experience.
 
 ## Features
 
 ### Core Functionality
-- Integrated live preview directly in the editor
+- Direct text formatting as you type
 - Clean, distraction-free writing environment
 - Smart typography with proper quotes and dashes
-- Syntax highlighting for code blocks
+- Code block highlighting
 - Dark mode with AMOLED support
 
 ### Enhanced Writing Experience
@@ -44,7 +44,7 @@ A modern, minimalist Markdown editor with live preview and enhanced writing feat
 ## Usage
 1. Start typing in the editor
 2. Use keyboard shortcuts or right-click menu for formatting
-3. See your formatted text instantly
+3. See your text format instantly as you type
 4. Export your work when ready
 
 ## Browser Support
