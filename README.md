@@ -14,19 +14,20 @@ A modern, minimalist Markdown editor with side-by-side preview and a clean writi
 - Side-by-side preview
 - Word count tracking
 - Autosave with status indicators
+- Right-click formatting menu
 - Clean, readable typography
 
 ### Formatting Options
-- Bold
-- Italic
+- Bold (Ctrl+B)
+- Italic (Ctrl+I)
 - Headings
 - Blockquotes
 - Code blocks
 - Links
 
 ### Export Options
-- Download as Markdown
-- Export to PDF
+- Download as Markdown (Ctrl+S)
+- Export to PDF (Ctrl+P)
 
 ### Technical Features
 - Local storage backup
@@ -35,10 +36,16 @@ A modern, minimalist Markdown editor with side-by-side preview and a clean writi
 - SEO optimized
 - Social sharing metadata
 
+## Keyboard Shortcuts
+- `Ctrl+B` - Bold text
+- `Ctrl+I` - Italic text
+- `Ctrl+S` - Download Markdown
+- `Ctrl+P` - Export PDF
+
 ## Usage
 1. Write Markdown in the left panel
 2. See formatted preview instantly in the right panel
-3. Use standard Markdown syntax for formatting
+3. Use keyboard shortcuts or right-click menu for formatting
 4. Export your work when ready
 
 ## Browser Support

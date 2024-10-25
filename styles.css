@@ -16,6 +16,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     background-color: var(--bg-light);
@@ -35,6 +39,11 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
+}
+
+h1 {
+    color: var(--primary);
+    font-size: 2rem;
 }
 
 .editor-container {
@@ -68,6 +77,11 @@ body {
 
 #preview h1 { font-size: 2em; margin: 0.67em 0; }
 #preview h2 { font-size: 1.5em; margin: 0.83em 0; }
+#preview h3 { font-size: 1.17em; margin: 1em 0; }
+#preview h4 { font-size: 1em; margin: 1.33em 0; }
+#preview h5 { font-size: 0.83em; margin: 1.67em 0; }
+#preview h6 { font-size: 0.67em; margin: 2.33em 0; }
+
 #preview blockquote {
     border-left: 3px solid var(--primary);
     margin: 1em 0;
@@ -82,33 +96,15 @@ body {
     font-family: 'Monaco', monospace;
 }
 
-.dark-mode {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
+#preview pre code {
+    display: block;
+    padding: 1em;
+    overflow-x: auto;
 }
 
-.dark-mode #editor, .dark-mode #preview {
-    background: #1a1a1a;
-    color: var(--text-dark);
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-h1 {
-    color: var(--primary);
-    font-size: 2rem;
-}
-
-#editor a {
+#preview a {
     color: var(--primary);
     text-decoration: underline;
-}
-
-#editor[placeholder]:empty:before {
-    content: attr(placeholder);
-    color: var(--secondary);
 }
 
 .actions {
@@ -132,7 +128,22 @@ button:hover {
     box-shadow: var(--shadow);
 }
 
+.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+.dark-mode #editor, .dark-mode #preview {
+    background: #1a1a1a;
+    color: var(--text-dark);
+}
+
+.dark-mode #preview code {
+    background: rgba(255,255,255,0.1);
+}
+
 .tooltip-menu {
+    display: none;
     position: fixed;
     background: white;
     border-radius: 4px;
@@ -242,6 +253,7 @@ input:checked + .slider:before {
     }
     
     .editor-container {
+        grid-template-columns: 1fr;
         height: calc(100vh - 150px);
     }
 }
