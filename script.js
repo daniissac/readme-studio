@@ -155,9 +155,12 @@ function loadSavedContent() {
 }
 
 function updateWordCount() {
-    const wordCount = editor.value.trim()
-        ? editor.value.trim().split(/\s+/).length
-        : 0;
+    const text = editor.value
+        .trim()
+        .replace(/[^\w\s]/g, '')  // Remove symbols and punctuation
+        .replace(/\s+/g, ' ');    // Normalize whitespace
+    
+    const wordCount = text ? text.split(/\s+/).length : 0;
     document.getElementById('word-count').textContent = `${wordCount} words`;
 }
 
