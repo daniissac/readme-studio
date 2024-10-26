@@ -6,39 +6,60 @@
     <meta name="description" content="MarkdownMe - A modern Markdown editor with live preview">
     <meta property="og:title" content="MarkdownMe">
     <meta property="og:description" content="Write and preview Markdown in real-time with a clean, distraction-free interface">
+    <meta property="og:type" content="website">
     <meta property="og:url" content="https://daniissac.com/markdown">
-    <title>MarkdownMe</title>
+    <meta name="theme-color" content="#000000">
+    
+    <title>MarkdownMe - Modern Markdown Editor</title>
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='6' fill='%23000000'/%3E%3Cpath d='M8 8h16v2H8zM8 14h12v2H8zM8 20h16v2H8z' fill='white'/%3E%3C/svg%3E">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Core Libraries -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+    <main class="container">
+        <header class="header">
             <h1>MarkdownMe</h1>
             <div class="status-bar">
                 <span id="word-count">0 words</span>
                 <span id="save-status"></span>
             </div>
             <div class="dark-mode-container">
-                <label class="switch">
+                <label class="switch" for="dark-mode-toggle">
                     <input type="checkbox" id="dark-mode-toggle">
                     <span class="slider round"></span>
                 </label>
             </div>
-        </div>
-        <div class="editor-container">
-            <textarea id="editor" placeholder="Write your Markdown here... (Right-click for formatting options)"></textarea>
-            <div id="preview"></div>
-        </div>
-        <div class="actions">
-            <button id="download-md" title="Download as Markdown (Ctrl+S)">Download MD</button>
-            <button id="export-pdf" title="Export as PDF (Ctrl+P)">Export PDF</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+        </header>
+
+        <section class="editor-container">
+            <textarea 
+                id="editor" 
+                placeholder="Write your Markdown here... (Right-click for formatting options)"
+                aria-label="Markdown editor"
+            ></textarea>
+            <div id="preview" role="region" aria-label="Preview"></div>
+        </section>
+
+        <footer class="actions">
+            <button id="download-md" title="Download as Markdown (Ctrl+S)">
+                Download MD
+            </button>
+            <button id="export-pdf" title="Export as PDF (Ctrl+P)">
+                Export PDF
+            </button>
+        </footer>
+    </main>
+
+    <!-- Main Script -->
+    <script defer src="script.js"></script>
 </body>
 </html>

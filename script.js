@@ -26,7 +26,16 @@ document.addEventListener('click', () => tooltipMenu.style.display = 'none');
 tooltipMenu.addEventListener('click', handleTooltipClick);
 darkModeToggle.addEventListener('click', toggleDarkMode);
 downloadMdBtn.addEventListener('click', downloadMarkdown);
-exportPdfBtn.addEventListener('click', exportToPdf);
+exportPdfBtn.addEventListener('click', () => {
+    const previewContent = document.getElementById('preview');
+    const options = {
+        margin: 1,
+        filename: 'document.pdf',
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(options).from(previewContent).save();
+});
 
 // Keyboard shortcuts
 document.addEventListener('keydown', e => {
@@ -46,7 +55,14 @@ document.addEventListener('keydown', e => {
                 break;
             case 'p':
                 e.preventDefault();
-                exportToPdf();
+                const previewContent = document.getElementById('preview');
+                const options = {
+                    margin: 1,
+                    filename: 'document.pdf',
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().set(options).from(previewContent).save();
                 break;
         }
     }
@@ -123,14 +139,6 @@ function downloadMarkdown() {
     URL.revokeObjectURL(url);
 }
 
-function exportToPdf() {
-    const content = preview.innerHTML;
-    const pdf = new jspdf.jsPDF();
-    pdf.html(content, {
-        callback: pdf => pdf.save('document.pdf')
-    });
-}
-
 function loadSavedContent() {
     const savedContent = localStorage.getItem('markdownContent');
     if (savedContent) {
@@ -147,8 +155,8 @@ function loadSavedContent() {
 function updateWordCount() {
     const text = editor.value
         .trim()
-        .replace(/[^\w\s]/g, '')  // Remove symbols and punctuation
-        .replace(/\s+/g, ' ');    // Normalize whitespace
+        .replace(/[^\w\s]/g, '')
+        .replace(/\s+/g, ' ');
     
     const wordCount = text ? text.split(/\s+/).length : 0;
     document.getElementById('word-count').textContent = `${wordCount} words`;
