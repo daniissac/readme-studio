@@ -96,7 +96,7 @@ function handleTooltipClick(e) {
         italic: ['_', '_'],
         heading: ['# '],
         quote: ['> '],
-        code: ['\n', '\n'],
+        code: ['```\n', '\n```'],
         link: ['[', '](url)']
     };
     
