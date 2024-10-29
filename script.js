@@ -87,21 +87,25 @@ function handleContextMenu(e) {
 }
 
 function handleTooltipClick(e) {
-    const format = e.target.dataset.format;
+    const tooltipItem = e.target.closest('.tooltip-item');
+    if (!tooltipItem) return;
+    
+    const format = tooltipItem.dataset.format;
     const formatActions = {
         bold: ['**', '**'],
         italic: ['_', '_'],
         heading: ['# '],
         quote: ['> '],
-        code: ['```\n', '\n```'],
+        code: ['\n', '\n'],
         link: ['[', '](url)']
     };
     
     if (formatActions[format]) {
         insertMarkdown(...formatActions[format]);
     }
+    
+    tooltipMenu.style.display = 'none';
 }
-
 function insertMarkdown(prefix, suffix = '') {
     const start = editor.selectionStart;
     const end = editor.selectionEnd;
