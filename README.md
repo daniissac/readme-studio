@@ -60,8 +60,8 @@ Toggle between light and dark themes. The preview pane switches between GitHub's
 ## Getting Started
 
 ```bash
-git clone https://github.com/daniissac/markdown.git
-cd markdown
+git clone https://github.com/daniissac/readme-studio.git
+cd readme-studio
 npm install
 npm run dev
 ```

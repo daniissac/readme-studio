@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daniissac/markdown.git"
+    "url": "git+https://github.com/daniissac/readme-studio.git"
   },
   "keywords": [
     "markdown",
@@ -22,9 +22,9 @@
   "author": "Dani Issac",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/daniissac/markdown/issues"
+    "url": "https://github.com/daniissac/readme-studio/issues"
   },
-  "homepage": "https://github.com/daniissac/markdown#readme",
+  "homepage": "https://github.com/daniissac/readme-studio#readme",
   "devDependencies": {
     "vite": "^8.0.1"
   },
