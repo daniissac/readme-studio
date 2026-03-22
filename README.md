@@ -94,7 +94,3 @@ Output goes to `dist/`. Deploy to any static host.
 - [mermaid](https://mermaid.js.org/) — diagram rendering
 - [KaTeX](https://katex.org/) — math rendering
 - [DOMPurify](https://github.com/cure53/DOMPurify) — XSS protection
-
-## License
-
-[MIT](LICENSE)
