@@ -1,0 +1,40 @@
+{
+  "name": "readme-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A GitHub README authoring tool with pixel-perfect rendering, alerts, Mermaid diagrams, math, templates, and badge builder.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniissac/markdown.git"
+  },
+  "keywords": [
+    "markdown",
+    "readme",
+    "github",
+    "editor"
+  ],
+  "author": "Dani Issac",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daniissac/markdown/issues"
+  },
+  "homepage": "https://github.com/daniissac/markdown#readme",
+  "devDependencies": {
+    "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "dompurify": "^3.3.3",
+    "github-markdown-css": "^5.9.0",
+    "highlight.js": "^11.11.1",
+    "katex": "^0.16.40",
+    "marked": "^17.0.5",
+    "marked-highlight": "^2.2.3",
+    "mermaid": "^11.13.0"
+  }
+}

@@ -1,65 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MarkdownMe - A modern Markdown editor with live preview">
-    <meta property="og:title" content="MarkdownMe">
-    <meta property="og:description" content="Write and preview Markdown in real-time with a clean, distraction-free interface">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://daniissac.com/markdown">
-    <meta name="theme-color" content="#000000">
-    
-    <title>MarkdownMe - Modern Markdown Editor</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='6' fill='%23000000'/%3E%3Cpath d='M8 8h16v2H8zM8 14h12v2H8zM8 20h16v2H8z' fill='white'/%3E%3C/svg%3E">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
-    
-    <!-- Core Libraries -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="README Studio - Write GitHub READMEs with pixel-perfect preview, alerts, Mermaid diagrams, math, templates, and badges">
+  <meta property="og:title" content="README Studio">
+  <meta property="og:description" content="GitHub README authoring tool with pixel-perfect rendering, templates, and badge builder">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://daniissac.com/markdown">
+  <meta name="theme-color" content="#0969da">
+  <title>README Studio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='6' fill='%230969da'/%3E%3Cpath d='M7 8h18v2.5H7zM7 14h13v2.5H7zM7 20h18v2.5H7z' fill='white'/%3E%3C/svg%3E">
 </head>
 <body>
-    <main class="container">
-        <header class="header">
-            <h1>MarkdownMe</h1>
-            <div class="status-bar">
-                <span id="word-count">0 words</span>
-                <span id="save-status"></span>
-            </div>
-            <div class="dark-mode-container">
-                <label class="switch" for="dark-mode-toggle">
-                    <input type="checkbox" id="dark-mode-toggle">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-        </header>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <h1>README Studio <small>GitHub README Editor</small></h1>
+      <div class="header-right">
+        <div class="status-bar">
+          <span id="word-count">0 words</span>
+          <span id="save-status"></span>
+        </div>
+        <label class="switch" for="dark-mode-toggle" aria-label="Toggle dark mode">
+          <input type="checkbox" id="dark-mode-toggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
 
-        <section class="editor-container">
-            <textarea 
-                id="editor" 
-                placeholder="Write your Markdown here... (Right-click for formatting options)"
-                aria-label="Markdown editor"
-            ></textarea>
-            <div id="preview" role="region" aria-label="Preview"></div>
-        </section>
+    <!-- Toolbar -->
+    <div class="toolbar" id="toolbar">
+      <div class="toolbar-group">
+        <button data-action="bold" data-tooltip="Bold (Ctrl+B)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg></button>
+        <button data-action="italic" data-tooltip="Italic (Ctrl+I)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg></button>
+        <button data-action="strikethrough" data-tooltip="Strikethrough"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4c-.5-1.5-2.5-3-5-3-3 0-5 2-5 4.5 0 2 1.5 3.5 5 4.5"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M8 20c.5 1.5 2.5 3 5 3 3 0 5-2 5-4.5 0-2-1.5-3.5-5-4.5"/></svg></button>
+      </div>
+      <div class="toolbar-sep"></div>
+      <div class="toolbar-group">
+        <button data-action="heading" data-tooltip="Heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16"/><path d="M20 4v16"/><path d="M4 12h16"/></svg></button>
+        <button data-action="quote" data-tooltip="Blockquote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18" stroke-dasharray="2 3"/><rect x="1" y="5" width="2" height="14" rx="1" fill="currentColor" stroke="none"/></svg></button>
+        <button data-action="code" data-tooltip="Code block"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></button>
+        <button data-action="link" data-tooltip="Link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+        <button data-action="image" data-tooltip="Image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button>
+      </div>
+      <div class="toolbar-sep"></div>
+      <div class="toolbar-group">
+        <button data-action="table" data-tooltip="Table"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></button>
+        <button data-action="hr" data-tooltip="Horizontal rule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="7" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>
+      </div>
+      <div class="toolbar-sep toolbar-sep-wide"></div>
+      <div class="toolbar-group">
+        <div class="toolbar-dropdown" id="alert-dropdown">
+          <button class="dropdown-trigger toolbar-btn-labeled" data-tooltip="Insert GitHub alert callout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Alerts</span>
+            <svg class="dropdown-caret" viewBox="0 0 12 12" width="10" height="10"><path fill="currentColor" d="M6 8.825a.5.5 0 0 1-.354-.146l-3.5-3.5a.5.5 0 1 1 .708-.708L6 7.618l3.146-3.147a.5.5 0 1 1 .708.708l-3.5 3.5A.5.5 0 0 1 6 8.825z"/></svg>
+          </button>
+          <div class="toolbar-dropdown-menu">
+            <button data-action="alert-note"><span class="dropdown-dot" style="background:#0969da"></span> Note</button>
+            <button data-action="alert-tip"><span class="dropdown-dot" style="background:#1a7f37"></span> Tip</button>
+            <button data-action="alert-important"><span class="dropdown-dot" style="background:#8250df"></span> Important</button>
+            <button data-action="alert-warning"><span class="dropdown-dot" style="background:#9a6700"></span> Warning</button>
+            <button data-action="alert-caution"><span class="dropdown-dot" style="background:#cf222e"></span> Caution</button>
+          </div>
+        </div>
+        <button data-action="mermaid" data-tooltip="Insert Mermaid diagram" class="toolbar-btn-labeled">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="8" y="14" width="7" height="7" rx="1"/><line x1="6.5" y1="10" x2="6.5" y2="12"/><line x1="17.5" y1="10" x2="17.5" y2="12"/><line x1="6.5" y1="12" x2="17.5" y2="12"/><line x1="11.5" y1="12" x2="11.5" y2="14"/></svg>
+          <span>Diagram</span>
+        </button>
+      </div>
+      <div class="toolbar-sep toolbar-sep-wide"></div>
+      <div class="toolbar-group">
+        <button id="template-btn" class="toolbar-btn-labeled" data-tooltip="Choose a README starter template">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+          <span>Templates</span>
+        </button>
+        <button id="toc-btn" class="toolbar-btn-labeled" data-tooltip="Generate table of contents from headings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span>TOC</span>
+        </button>
+        <button id="badge-btn" class="toolbar-btn-labeled" data-tooltip="Build shields.io badges">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <span>Badges</span>
+        </button>
+      </div>
+    </div>
 
-        <footer class="actions">
-            <button id="download-md" title="Download as Markdown (Ctrl+S)">
-                Download MD
-            </button>
-            <button id="export-pdf" title="Export as PDF (Ctrl+P)">
-                Export PDF
-            </button>
-        </footer>
-    </main>
+    <!-- Editor + Preview -->
+    <section class="editor-area">
+      <textarea
+        id="editor"
+        placeholder="Start writing your README..."
+        aria-label="Markdown editor"
+        spellcheck="true"
+      ></textarea>
+      <div id="preview" class="markdown-body" role="region" aria-label="Preview"></div>
+    </section>
 
-    <!-- Main Script -->
-    <script defer src="script.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="status-bar">
+        <span id="footer-info">Markdown &middot; GitHub Flavored</span>
+      </div>
+      <div class="footer-actions">
+        <button id="copy-md" title="Copy raw Markdown">Copy MD</button>
+        <button id="copy-html" title="Copy rendered HTML">Copy HTML</button>
+        <button id="download-md" title="Download as README.md (Ctrl+S)">Download</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Template Modal -->
+  <div class="modal-overlay" id="template-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>README Templates</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div id="template-list"></div>
+    </div>
+  </div>
+
+  <!-- Badge Modal -->
+  <div class="modal-overlay" id="badge-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Badge Builder</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="badge-form">
+        <label for="badge-category">Category</label>
+        <select id="badge-category"></select>
+        <label for="badge-badge">Badge</label>
+        <select id="badge-badge"></select>
+        <div id="badge-fields"></div>
+        <div class="badge-preview-box" id="badge-preview"></div>
+        <button class="badge-insert-btn" id="badge-insert">Insert Badge</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>
