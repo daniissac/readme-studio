@@ -456,6 +456,21 @@ input:checked + .slider::before {
   gap: 0.5rem;
 }
 
+.footer-source {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-source:hover {
+  text-decoration: underline;
+}
+
+.dark-mode .footer-source {
+  color: var(--accent-dark);
+}
+
 .footer-actions button {
   padding: 0.3rem 0.75rem;
   font-size: 0.8rem;
