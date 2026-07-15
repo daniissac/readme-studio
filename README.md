@@ -4,6 +4,13 @@ A GitHub README authoring tool with pixel-perfect preview, GitHub-specific Markd
 
 Write READMEs that look exactly like they will on GitHub — with alerts, Mermaid diagrams, math, syntax highlighting, and more.
 
+[![CI](https://github.com/daniissac/readme-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/daniissac/readme-studio/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**[Open README Studio](https://daniissac.com/readme-studio/)** · [View the source](https://github.com/daniissac/readme-studio)
+
+[![README Studio editor and GitHub-style preview](public/og.png)](https://daniissac.com/readme-studio/)
+
 ## Features
 
 ### Pixel-Perfect GitHub Preview
@@ -59,6 +66,8 @@ Toggle between light and dark themes. The preview pane switches between GitHub's
 
 ## Getting Started
 
+The fastest way to use the editor is the [hosted app](https://daniissac.com/readme-studio/). To run it locally:
+
 ```bash
 git clone https://github.com/daniissac/readme-studio.git
 cd readme-studio
@@ -94,3 +103,16 @@ Output goes to `dist/`. Deploy to any static host.
 - [mermaid](https://mermaid.js.org/) — diagram rendering
 - [KaTeX](https://katex.org/) — math rendering
 - [DOMPurify](https://github.com/cure53/DOMPurify) — XSS protection
+
+## Contributing
+
+Bug reports and focused pull requests are welcome. Run the test and production build before opening a pull request:
+
+```bash
+npm test
+npm run build
+```
+
+## License
+
+[MIT](LICENSE)
